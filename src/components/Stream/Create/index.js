@@ -1,7 +1,7 @@
 import { reduxForm } from 'redux-form';
 import StreamCreateJsx from './StreamCreate';
 
-const StreamCreate = () => StreamCreateJsx();
+const StreamCreate = () => new StreamCreateJsx();
 
 const validate = (formValues) => {
   const errors = {};
