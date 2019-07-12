@@ -3,8 +3,9 @@ import { Field } from 'redux-form';
 
 class StreamCreateJsx extends React.Component {
 
-  onSubmit(formProps) {
-    console.log(formProps);
+  onSubmit = (formValues) => {
+    console.log(formValues);
+    this.props.createStream(formValues);
   }
 
   renderError = ({error, touched}) => {
