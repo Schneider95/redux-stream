@@ -1,5 +1,32 @@
+import PropTypes from 'prop-types';
+import React from 'react';
+import { connect } from 'react-redux';
 import StreamEditJsx from './StreamEdit';
 
-const StreamEdit = () => StreamEditJsx();
+// class StreamEdit extends React.Component {
+//   render = (props) => {
+//     console.log(props);
+//     return StreamEditJsx();
+//   };
+// }
 
-export default StreamEdit;
+const StreamEdit = props => {
+  console.log(props);
+  return <div>StreamEdit</div>;
+}
+
+
+const mapStateToProps = (state, ownProps) => {
+
+  const { id } = ownProps.match.params;
+
+  return { stream: state.streams[id] };
+};
+
+const mapDispatchToProps = () => {
+
+};
+
+const StreamEditConnect = connect(mapStateToProps);
+const StreamEditConnected = StreamEditConnect(StreamEdit);
+export default StreamEditConnected;

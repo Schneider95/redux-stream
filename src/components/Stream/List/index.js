@@ -12,24 +12,27 @@ class StreamList extends React.Component {
   }
 
   render = () => {
-    const { streams, userId } = this.props;
+    const { isSignedIn, streams, userId } = this.props;
 
-    return StreamListJsx(streams, userId);
+    return StreamListJsx(isSignedIn, streams, userId);
   };
 }
 
 StreamList.defaultProps = {
-  streams: {},
+  isSignedIn: false,
+  streams: [],
   userId: null,
 };
 
 StreamList.propTypes = {
   fetchStreams: PropTypes.func.isRequired,
-  streams: PropTypes.objectOf(PropTypes.string),
+  isSignedIn: PropTypes.bool,
+  streams: PropTypes.arrayOf(PropTypes.object),
   userId: PropTypes.string,
 };
 
 const mapStateToProps = state => ({
+  isSignedIn: state.auth.isSignedIn,
   streams: Object.values(state.streams),
   userId: state.auth.userId,
 });
