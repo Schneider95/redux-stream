@@ -4,7 +4,6 @@ import { Field } from 'redux-form';
 class StreamCreateJsx extends React.Component {
 
   onSubmit = (formValues) => {
-    console.log(formValues);
     this.props.createStream(formValues);
   }
 
@@ -21,15 +20,7 @@ class StreamCreateJsx extends React.Component {
   }
 
   renderInput = ({ input, label, meta }) => {
-    // return <input {...formProps.input} />
-    // return (
-    //   <input
-    //     onChange={formProps.input.onChange}
-    //     value={formProps.input.value} p
-    //   />
-    // );
-
-    const className= `field ${meta.error && meta.touched ? 'error': ''}`;
+    const className = `field ${meta.error && meta.touched ? 'error': ''}`;
 
     return (
       <div className={className}>
