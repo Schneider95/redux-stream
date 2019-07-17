@@ -1,11 +1,12 @@
 import React from 'react';
-import { Field } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
+import StreamFormJsx from './StreamForm';
 
-class StreamCreateJsx extends React.Component {
+class StreamForm extends React.Component {
 
   onSubmit = (formValues) => {
-    console.log(formValues);
-    this.props.createStream(formValues);
+    //console.log(formValues);
+    this.props.onSubmit(formValues);
   }
 
   renderError = ({error, touched}) => {
@@ -41,6 +42,7 @@ class StreamCreateJsx extends React.Component {
   }
 
   render = () => {
+    // return StreamFormJsx(this.props.onSubmit);
     return (
       <form
         className="ui form error"
@@ -59,7 +61,29 @@ class StreamCreateJsx extends React.Component {
         <button className="ui button primary">Submit</button>
       </form>
     );
-  }
+  };
 }
 
-export default StreamCreateJsx;
+const validate = (formValues) => {
+  const errors = {};
+
+  if (!formValues.title) {
+    errors.title = 'You must enter a title.';
+  }
+
+  if (!formValues.description) {
+    errors.description = 'You must enter a description.';
+  }
+
+  return errors;
+};
+
+// Créer un form decorator
+const formDecorator = reduxForm({
+  form: 'streamForm',
+  validate,
+});
+
+// Encapsule le composant StreamForm dans ce formDecorator
+export default formDecorator(StreamForm);
+

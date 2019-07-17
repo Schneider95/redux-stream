@@ -1,9 +1,24 @@
+import React from 'react';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import StreamCreateJsx from './StreamCreate';
 import { createStreamAction } from '../../../actions';
+import StreamForm from '../Form';
 
-const StreamCreate = () => new StreamCreateJsx();
+class StreamCreate extends React.Component {
+  onSubmit = (formValues) => {
+    this.props.createStream(formValues);
+  }
+
+  render = () => {
+    return (
+      <div>
+        <h3>Create stream</h3>
+        <StreamForm onSubmit={this.onSubmit} />
+      </div>
+    );
+  }
+}
 
 const validate = (formValues) => {
   const errors = {};
