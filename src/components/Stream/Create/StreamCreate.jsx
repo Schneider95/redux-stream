@@ -9,8 +9,6 @@ class StreamCreateJsx extends React.Component {
     const { onSubmit } = props;
 
     this.props.onSubmit = onSubmit;
-
-    console.log(this.props.onSubmit);
   }
 
   render = () => {

@@ -1,25 +1,12 @@
-import React from 'react';
-import { Field, reduxForm } from 'redux-form';
+import PropTypes from 'prop-types';
+import { reduxForm } from 'redux-form';
 import StreamFormJsx from './StreamForm';
 
-class StreamForm extends React.Component {
+const StreamForm = (props) => {
+  const { handleSubmit, onSubmit } = props;
 
-  constructor(props) {
-    super(props);
-  }
-
-  render = () => {
-
-    console.log(this.props);
-
-    const props = {
-      handleSubmit: this.props.handleSubmit,
-      onSubmit: this.props.onSubmit
-    };
-
-    return new StreamFormJsx(props).render();
-  };
-}
+  return new StreamFormJsx({ handleSubmit, onSubmit }).render();
+};
 
 const validate = (formValues) => {
   const errors = {};
@@ -35,6 +22,11 @@ const validate = (formValues) => {
   return errors;
 };
 
+StreamForm.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+};
+
 // Créer un form decorator
 const formDecorator = reduxForm({
   form: 'streamForm',
@@ -42,6 +34,5 @@ const formDecorator = reduxForm({
 });
 
 // Encapsule le composant StreamForm dans ce formDecorator
-//export default StreamForm;
+// export default StreamForm;
 export default formDecorator(StreamForm);
-

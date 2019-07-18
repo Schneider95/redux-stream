@@ -1,12 +1,14 @@
+import PropTypes from 'prop-types';
 import React from 'react';
-import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import StreamCreateJsx from './StreamCreate';
 import { createStreamAction } from '../../../actions';
 
 class StreamCreate extends React.Component {
   onSubmit = (formValues) => {
-    this.props.createStream(formValues);
+    const { createStream } = this.props;
+
+    createStream(formValues);
   }
 
   render = () => {
@@ -14,6 +16,11 @@ class StreamCreate extends React.Component {
     return new StreamCreateJsx(props).render();
   };
 }
+
+
+StreamCreate.propTypes = {
+  createStream: PropTypes.func.isRequired,
+};
 
 /**
  * Declare that the "songs" property on this component,
