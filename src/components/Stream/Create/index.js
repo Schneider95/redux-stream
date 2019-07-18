@@ -3,7 +3,6 @@ import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import StreamCreateJsx from './StreamCreate';
 import { createStreamAction } from '../../../actions';
-import StreamForm from '../Form';
 
 class StreamCreate extends React.Component {
   onSubmit = (formValues) => {
@@ -11,28 +10,10 @@ class StreamCreate extends React.Component {
   }
 
   render = () => {
-    return (
-      <div>
-        <h3>Create stream</h3>
-        <StreamForm onSubmit={this.onSubmit} />
-      </div>
-    );
-  }
+    const props = { onSubmit: this.onSubmit };
+    return new StreamCreateJsx(props).render();
+  };
 }
-
-const validate = (formValues) => {
-  const errors = {};
-
-  if (!formValues.title) {
-    errors.title = 'You must enter a title.';
-  }
-
-  if (!formValues.description) {
-    errors.description = 'You must enter a description.';
-  }
-
-  return errors;
-};
 
 /**
  * Declare that the "songs" property on this component,
@@ -48,15 +29,6 @@ const mapDispatchToProps = {
   createStream: createStreamAction,
 };
 
-// Créer un form decorator
-const formDecorator = reduxForm({
-  form: 'streamCreate',
-  validate,
-});
-
-// Encapsule le composant StreamCreate dans ce formDecorator
-const StreamCreateForm = formDecorator(StreamCreate);
-
 /**
  * The connect() function connects a React component to a Redux store.
  * It returns a "connect component".
@@ -70,6 +42,6 @@ const StreamCreateConnect = connect(mapStateToProps, mapDispatchToProps);
  * Connect the StreamCreateForm component to the store, thanks to the
  * connectComponent
  */
-const StreamCreateConnected = StreamCreateConnect(StreamCreateForm);
+const StreamCreateConnected = StreamCreateConnect(StreamCreate);
 
 export default StreamCreateConnected;

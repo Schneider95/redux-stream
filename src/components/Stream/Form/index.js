@@ -4,12 +4,20 @@ import StreamFormJsx from './StreamForm';
 
 class StreamForm extends React.Component {
 
-  onSubmit = (formValues) => {
-    this.props.onSubmit(formValues);
+  constructor(props) {
+    super(props);
   }
 
   render = () => {
-    return new StreamFormJsx().render();
+
+    console.log(this.props);
+
+    const props = {
+      handleSubmit: this.props.handleSubmit,
+      onSubmit: this.props.onSubmit
+    };
+
+    return new StreamFormJsx(props).render();
   };
 }
 
@@ -34,5 +42,6 @@ const formDecorator = reduxForm({
 });
 
 // Encapsule le composant StreamForm dans ce formDecorator
+//export default StreamForm;
 export default formDecorator(StreamForm);
 

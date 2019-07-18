@@ -1,54 +1,23 @@
 import React from 'react';
 import { Field } from 'redux-form';
+import StreamForm from '../Form';
 
 class StreamCreateJsx extends React.Component {
 
-  onSubmit = (formValues) => {
-    this.props.createStream(formValues);
-  }
+  constructor(props) {
+    super(props);
+    const { onSubmit } = props;
 
-  renderError = ({error, touched}) => {
-    if (touched && error) {
-      return (
-        <div className="ui error message">
-          <div className="header">
-            {error}
-          </div>
-        </div>
-      );
-    }
-  }
+    this.props.onSubmit = onSubmit;
 
-  renderInput = ({ input, label, meta }) => {
-    const className = `field ${meta.error && meta.touched ? 'error': ''}`;
-
-    return (
-      <div className={className}>
-        <label>{label}</label>
-        <input {...input} />
-        {this.renderError(meta)}
-      </div>
-    );
+    console.log(this.props.onSubmit);
   }
 
   render = () => {
     return (
-      <form
-        className="ui form error"
-        onSubmit={this.props.handleSubmit(this.onSubmit)}
-      >
-        <Field
-          component={this.renderInput}
-          label="Title"
-          name="title"
-        />
-        <Field
-          component={this.renderInput}
-          label="Description"
-          name="description"
-        />
-        <button className="ui button primary">Submit</button>
-      </form>
+      <div>
+        <StreamForm onSubmit={this.props.onSubmit}/>
+      </div>
     );
   }
 }

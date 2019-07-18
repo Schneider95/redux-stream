@@ -31,15 +31,22 @@ const renderInput = ({input, label, meta}) => {
 };
 
 class StreamFormJsx extends React.Component {
+
   constructor(props) {
     super(props);
+
+    const { handleSubmit, onSubmit } = props;
+
+    this.props.handleSubmit = handleSubmit;
+    this.props.onSubmit = onSubmit;
   }
 
-  render() {
+  render = () => {
     return (
       <div>
         <form
           className="ui form error"
+          onSubmit={this.props.handleSubmit(this.props.onSubmit)}
         >
           <Field
             component={renderInput}
