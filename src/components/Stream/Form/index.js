@@ -3,9 +3,9 @@ import { reduxForm } from 'redux-form';
 import StreamFormJsx from './StreamForm';
 
 const StreamForm = (props) => {
-  const { handleSubmit, onSubmit } = props;
+  const { handleSubmit, initialValues, onSubmit } = props;
 
-  return new StreamFormJsx({ handleSubmit, onSubmit }).render();
+  return new StreamFormJsx({ handleSubmit, initialValues, onSubmit }).render();
 };
 
 const validate = (formValues) => {
@@ -24,6 +24,7 @@ const validate = (formValues) => {
 
 StreamForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
+  initialValues: PropTypes.objectOf(PropTypes.string),
   onSubmit: PropTypes.func.isRequired,
 };
 

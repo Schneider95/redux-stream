@@ -14,6 +14,7 @@ class StreamCreateJsx extends React.Component {
   render = () => {
     return (
       <div>
+        <h3>Create Stream</h3>
         <StreamForm onSubmit={this.props.onSubmit}/>
       </div>
     );

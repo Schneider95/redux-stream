@@ -35,9 +35,10 @@ class StreamFormJsx extends React.Component {
   constructor(props) {
     super(props);
 
-    const { handleSubmit, onSubmit } = props;
+    const { handleSubmit, initialValues, onSubmit } = props;
 
     this.props.handleSubmit = handleSubmit;
+    this.props.initialValues = initialValues;
     this.props.onSubmit = onSubmit;
   }
 
