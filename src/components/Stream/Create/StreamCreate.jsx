@@ -1,5 +1,4 @@
 import React from 'react';
-import { Field } from 'redux-form';
 import StreamForm from '../Form';
 
 class StreamCreateJsx extends React.Component {

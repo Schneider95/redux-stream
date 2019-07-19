@@ -13,9 +13,12 @@ const StreamListJsx = (isSignedIn, streams, userId) => {
           >
             Edit
           </Link>
-          <button className="ui button negative">
+          <Link
+            className="ui button negative"
+            to={`/streams/delete/${stream.id}`}
+          >
             Delete
-          </button>
+          </Link>
         </div>
       );
     }

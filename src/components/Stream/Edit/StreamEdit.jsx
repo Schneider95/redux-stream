@@ -1,6 +1,5 @@
 import React from 'react';
 import _ from 'lodash';
-import { Field } from 'redux-form';
 import StreamForm from '../Form';
 
 class StreamEditJsx extends React.Component {

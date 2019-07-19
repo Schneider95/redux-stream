@@ -29,11 +29,30 @@ class StreamEdit extends React.Component {
   };
 }
 
+StreamEdit.defaultProps = {
+  stream: undefined,
+};
+
 StreamEdit.propTypes = {
   editStream: PropTypes.func.isRequired,
   fetchStream: PropTypes.func.isRequired,
-  match: PropTypes.arrayOf(PropTypes.string).isRequired,
-  stream: PropTypes.objectOf(PropTypes.string).isRequired,
+  match: PropTypes.objectOf(
+    PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.bool,
+      PropTypes.number,
+      PropTypes.string,
+      PropTypes.objectOf(PropTypes.string),
+    ]),
+  ).isRequired,
+  stream: PropTypes.objectOf(
+    PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.bool,
+      PropTypes.number,
+      PropTypes.string,
+    ]),
+  ),
 };
 
 const mapStateToProps = (state, ownProps) => ({ stream: state.streams[ownProps.match.params.id] });

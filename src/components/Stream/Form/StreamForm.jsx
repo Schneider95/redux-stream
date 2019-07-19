@@ -31,17 +31,6 @@ const renderInput = ({input, label, meta}) => {
 };
 
 class StreamFormJsx extends React.Component {
-
-  constructor(props) {
-    super(props);
-
-    const { handleSubmit, initialValues, onSubmit } = props;
-
-    this.props.handleSubmit = handleSubmit;
-    this.props.initialValues = initialValues;
-    this.props.onSubmit = onSubmit;
-  }
-
   render = () => {
     return (
       <div>
@@ -51,7 +40,7 @@ class StreamFormJsx extends React.Component {
         >
           <Field
             component={renderInput}
-            label="Title" type="text"
+            label="Title"
             name="title"
           />
           <Field
