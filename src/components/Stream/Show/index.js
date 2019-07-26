@@ -1,25 +1,87 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import flv from 'flv.js';
 import { connect } from 'react-redux';
 import StreamShowJsx from './StreamShow';
 import { fetchStreamAction } from '../../../actions';
 
 class StreamShow extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.videoRef = React.createRef();
+  }
+
   componentDidMount = () => {
     const { fetchStream, match } = this.props;
-
+    console.log('componentDidMount');
     fetchStream(match.params.id);
+    this.buildPlayer();
   };
+
+
+  componentDidUpdate = () => {
+
+    this.buildPlayer();
+  }
+
+  buildPlayer() {
+    console.log('buildPlayer');
+    console.log(this.player,this.props.stream);
+    console.log(this.player || !this.props.stream);
+
+
+    if (this.player || !this.props.stream) {
+      return;
+    }
+
+    const { id } = this.props.match.params;
+    console.log('id'+id);
+    this.player = flv.createPlayer({
+      type: 'flv',
+      url: `http://localhost:8000/live/${id}.flv`
+    });
+    this.player.attachMediaElement(this.videoRef.current);
+    this.player.load();
+  }
+
+  // render = () => {
+  //   const { stream, match } = this.props;
+  //   const { id } = this.props.match.params;
+
+  //   const props = {
+  //     id,
+  //     player: this.player,
+  //     stream,
+  //     videoRef: this.videoRef
+  //   };
+
+  //   return new StreamShowJsx(props).render();
+  // };
 
   render = () => {
-    const { stream } = this.props;
 
-    const props = {
-      stream,
-    };
+    return (
+      <div>
+        {typeof this.props.stream !== 'undefined' &&
+          <div>
+            <video
+              controls={true}
+              ref={this.videoRef}
+              style={{ width: '100%' }}
+            />
+            <h1>{this.props.stream.title}</h1>
+            <h5>{this.props.stream.description}</h5>
+          </div>
+        }
 
-    return new StreamShowJsx(props).render();
-  };
+        {typeof this.props.stream === 'undefined' &&
+          <div>Loading.....</div>
+        }
+
+      </div>
+    );
+  }
 }
 
 StreamShow.defaultProps = {
