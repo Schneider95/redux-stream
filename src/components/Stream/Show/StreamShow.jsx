@@ -1,39 +1,36 @@
 import React from 'react';
-import flv from 'flv.js';
 
 class StreamShowJsx extends React.Component {
-
   constructor(props) {
     super(props);
-
     const { stream } = props;
-
-    console.log(stream);
 
     this.props.stream = stream;
   }
 
   render = () => {
-    const { stream } = this.props;
+    const { stream, videoRef } = this.props;
 
     return (
       <div>
-        {typeof this.props.stream !== 'undefined' &&
-          <div>
-            <video
-              controls={true}
-              ref={this.videoRef}
-              style={{ width: '100%' }}
-            />
-            <h1>{this.props.stream.title}</h1>
-            <h5>{this.props.stream.description}</h5>
-          </div>
-        }
+        <div>
+          <video
+            controls={true}
+            ref={videoRef}
+            style={{ width: '100%' }}
+          />
 
-        {typeof this.props.stream === 'undefined' &&
-          <div>Loading.....</div>
-        }
+          {typeof stream !== 'undefined' &&
+            <div>
+              <h1>{stream.title}</h1>
+              <h5>{stream.description}</h5>
+            </div>
+          }
 
+          {typeof stream === 'undefined' &&
+            <div>Loading.....</div>
+          }
+        </div>
       </div>
     );
   }
